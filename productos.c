@@ -1,5 +1,6 @@
 #include<conio.h>
 #include<stdio.h>
+#include<stdlib.h>
 #include "productos.h"
 
 void registrar(int cont, venta *v){
@@ -19,7 +20,7 @@ void registrar(int cont, venta *v){
                 if(v[cont].fechaRegistro.aa>0){
                     printf("Ingrese el nombre del comprador: ");
                     gets(v[cont].nombreC);
-                    printf("-----Registro exitoso-----\n");
+                    printf("-------- Registro exitoso --------\n");
                     cont++;
                 }else
                     printf("Datos invalidos\n");
@@ -28,7 +29,7 @@ void registrar(int cont, venta *v){
         } else
             printf("Datos invalidos\n");
     }else{
-        printf("Debe ingresar un valor positivo y diferente de cero\n");
+        printf("Debe ingresar un valor positivo o diferente de cero y es un valor existente\n");
     }
 }
 
@@ -89,7 +90,7 @@ int inventario(){
             case 3:
                 system("pause");
                 system("cls");
-                return main();
+                return 0;
                 break;
             default:
                 printf("Opcion incorrecta ingrese una opcion valida\n");
@@ -126,8 +127,8 @@ void registrarProducto(int cont, producto *nuevo){
 }
 
 void productosLista(int cont, producto *p){
+    printf("----Inventario Productos----\n");
     for(int i=0;i<cont;i++){
-        printf("----Inventario Productos----\n");
         printf("Codigo: %i\n", p[i].id);
         printf("Nombre: %s\n", p[i].nombre);
         printf("Precio: %0.2f\n", p[i].precio);
