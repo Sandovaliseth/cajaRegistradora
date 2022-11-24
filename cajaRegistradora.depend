@@ -1,0 +1,32 @@
+# depslib dependency file v1.0
+1669235878 source:c:\users\wposs\documents\liseth\cajaregistradora\main.c
+	<conio.h>
+	<stdio.h>
+	<stdlib.h>
+	"productos.h"
+
+1669235558 c:\users\wposs\documents\liseth\cajaregistradora\productos.h
+
+1669235564 source:c:\users\wposs\documents\liseth\cajaregistradora\productos.c
+	<conio.h>
+	<stdio.h>
+	"productos.h"
+
+1669060360 source:c:\users\wposs\documents\liseth\cajaregistradora\inventario.c
+	<conio.h>
+	<stdio.h>
+	"productos.h"
+
+1669260235 source:b:\downloads\videosc-main (1)\videosc-main\cajaregistradora\main.c
+	<conio.h>
+	<stdio.h>
+	<stdlib.h>
+	"productos.h"
+
+1669268003 b:\downloads\videosc-main (1)\videosc-main\cajaregistradora\productos.h
+
+1669268455 source:b:\downloads\videosc-main (1)\videosc-main\cajaregistradora\productos.c
+	<conio.h>
+	<stdio.h>
+	"productos.h"
+
