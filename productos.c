@@ -42,6 +42,11 @@ void imprimirVentas(int cont, venta *v){
     }
 }
 
+void salir(){
+    printf("------FIN PROGRAMA------\n");
+    exit(0);
+}
+
 int inventario(){
     int opcion, cont=3;
     producto *listap;
@@ -90,6 +95,7 @@ int inventario(){
                 printf("Opcion incorrecta ingrese una opcion valida\n");
         }
     } while(opcion!=3);
+    free(listap);
     getch();
     return 0;
 }
