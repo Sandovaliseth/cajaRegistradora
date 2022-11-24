@@ -30,3 +30,16 @@
 	<stdio.h>
 	"productos.h"
 
+1669297608 source:c:\users\wposs\downloads\cajaregistradora\productos.c
+	<conio.h>
+	<stdio.h>
+	"productos.h"
+
+1669295545 c:\users\wposs\downloads\cajaregistradora\productos.h
+
+1669295442 source:c:\users\wposs\downloads\cajaregistradora\main.c
+	<conio.h>
+	<stdio.h>
+	<stdlib.h>
+	"productos.h"
+

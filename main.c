@@ -18,7 +18,7 @@ int main(){
         switch(opcion){
             case 1:
                 system("cls");
-                registrar(lista);
+                registrar(cont, lista);
                 cont++;
                 break;
             case 2:
@@ -27,15 +27,12 @@ int main(){
                 break;
             case 3:
                 system("cls");
-                if(cont!=0)
-                {
+                if(cont!=0){
                     imprimirVentas(cont, lista);
                 }
-                else
-                {
+                else{
                     printf("No se encuentra ningun elemento para mostrar \n");
                 }
-
                 break;
             case 4:
                 printf("------FIN PROGRAMA------\n");

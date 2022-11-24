@@ -1,26 +1,35 @@
 #include<conio.h>
 #include<stdio.h>
 #include "productos.h"
-int tam=0;//contador de ventas
-int tam_2=3;//contador de productos
 
-void registrar(venta *v){
-
-        printf("Ingrese el codigo de la venta: ");
-        scanf("%i", &v[tam].id);
-        fflush(stdin);
+void registrar(int cont, venta *v){
+    printf("Ingrese el codigo de la venta: ");
+    scanf("%i", &v[cont].id);
+    if(v[cont].id>0){
         printf("Ingrese la fecha: ");
         printf("\nDia:");
-        scanf("%i", &v[tam].fechaRegistro.dd);
-        printf("Mes:");
-        scanf("%i", &v[tam].fechaRegistro.mm);
-        printf("Anio:");
-        scanf("%i", &v[tam].fechaRegistro.aa);
-        fflush(stdin);
-        printf("Ingrese el nombre del comprador: ");
-        gets(v[tam].nombreC);
-        printf("-----Registro exitoso-----\n");
-    tam++;
+        scanf("%i", &v[cont].fechaRegistro.dd);
+        if(v[cont].fechaRegistro.dd>0 && v[cont].fechaRegistro.dd<31){
+            printf("Mes:");
+            scanf("%i", &v[cont].fechaRegistro.mm);
+            if(v[cont].fechaRegistro.mm>0 && v[cont].fechaRegistro.mm<12){
+                printf("Anio:");
+                scanf("%i", &v[cont].fechaRegistro.aa);
+                fflush(stdin);
+                if(v[cont].fechaRegistro.aa>0){
+                    printf("Ingrese el nombre del comprador: ");
+                    gets(v[cont].nombreC);
+                    printf("-----Registro exitoso-----\n");
+                    cont++;
+                }else
+                    printf("Datos invalidos\n");
+            }else
+                printf("Datos invalidos\n");
+        } else
+            printf("Datos invalidos\n");
+    }else{
+        printf("Debe ingresar un valor positivo y diferente de cero\n");
+    }
 }
 
 void imprimirVentas(int cont, venta *v){
@@ -34,10 +43,10 @@ void imprimirVentas(int cont, venta *v){
 }
 
 int inventario(){
-    int opcion;
+    int opcion, cont=3;
     producto *listap;
-    int tamano;
-    listap=malloc(tamano*sizeof(producto));
+    int tam=100;
+    listap=malloc(tam*sizeof(producto));
 
     listap[0].id = 1;
     strcpy(listap[0].nombre, "Carne");
@@ -65,12 +74,12 @@ int inventario(){
         switch(opcion){
             case 1:
                 system("cls");
-                registrarProducto(listap);
+                registrarProducto(cont, listap);
+                cont++;
                 break;
             case 2:
                 system("cls");
-                productosLista(listap);
-
+                productosLista(cont, listap);
                 break;
             case 3:
                 system("pause");
@@ -85,25 +94,33 @@ int inventario(){
     return 0;
 }
 
-void registrarProducto(producto *nuevo){
+void registrarProducto(int cont, producto *nuevo){
     printf("Ingrese los datos del producto\n");
     printf("Codigo: ");
-    scanf("%i", & nuevo[tam_2].id);
+    scanf("%i", &nuevo[cont].id);
     fflush(stdin);
-    printf("Nombre: ");
-    gets( nuevo[tam_2].nombre);
-    printf("Precio:");
-    scanf("%f", & nuevo[tam_2].precio);
-    fflush(stdin);
-    printf("Cantidad: ");
-    scanf("%i", & nuevo[tam_2].cantidad);
-    printf("-----Registro exitoso-----\n");
-    tam_2++;
+    if(nuevo[cont].id>0){
+        printf("Nombre: ");
+        gets(nuevo[cont].nombre);
+        printf("Precio:");
+        scanf("%f", &nuevo[cont].precio);
+        if(nuevo[cont].precio>0){
+            printf("Cantidad: ");
+            scanf("%i", &nuevo[cont].cantidad);
+            if(nuevo[cont].cantidad>0){
+                printf("-----Registro exitoso-----\n");
+                cont++;
+            } else
+                printf("Datos invalidos\n");
+        }else
+            printf("Datos invalidos\n");
+    } else
+        printf("Debe ingresar un valor positivo y diferente de cero\n");
+
 }
 
-void productosLista(producto *p){
-    for(int i=0;i<4;i++)
-    {
+void productosLista(int cont, producto *p){
+    for(int i=0;i<cont;i++){
         printf("----Inventario Productos----\n");
         printf("Codigo: %i\n", p[i].id);
         printf("Nombre: %s\n", p[i].nombre);
