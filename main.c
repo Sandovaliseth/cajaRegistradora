@@ -6,7 +6,7 @@
 
 int main(){
     int opcion, cont=0, tam=100;
-    venta *lista;
+    venta *lista, *productos;
     lista=malloc(tam*sizeof(venta));
 
     do {
@@ -26,7 +26,7 @@ int main(){
                 break;
             case 2:
                 system("cls");
-                inventario();
+                productos=inventario();
                 break;
             case 3:
                 system("cls");

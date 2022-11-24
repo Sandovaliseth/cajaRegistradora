@@ -49,7 +49,7 @@ void salir(){
 }
 
 int inventario(){
-    int opcion, cont=3;
+    int opcion, cont=3, sigue=1;
     producto *listap;
     int tam=100;
     listap=malloc(tam*sizeof(producto));
@@ -68,7 +68,6 @@ int inventario(){
     strcpy(listap[2].nombre, "Arroz");
     listap[2].precio = 6000;
     listap[2].cantidad = 100;
-
 
     do {
         printf("------INVENTARIO------\n");
@@ -98,7 +97,7 @@ int inventario(){
     } while(opcion!=3);
     free(listap);
     getch();
-    return 0;
+    return listap;
 }
 
 void registrarProducto(int cont, producto *nuevo){
