@@ -86,7 +86,7 @@ int inventario(producto *listap){
             case 3:
                 system("pause");
                 system("cls");
-                return cont;
+                return;
                 break;
             default:
                 printf("Opcion incorrecta ingrese una opcion valida\n");
