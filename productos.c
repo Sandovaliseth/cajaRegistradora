@@ -48,12 +48,9 @@ void salir(){
     exit(0);
 }
 
-int inventario(){
-    int opcion, cont=3, sigue=1;
-    producto *listap;
-    int tam=100;
-    listap=malloc(tam*sizeof(producto));
-
+int inventario(producto *listap){
+    static int cont=3;
+    int opcion, tam=100;
     listap[0].id = 1;
     strcpy(listap[0].nombre, "Carne");
     listap[0].precio = 9000;
@@ -89,15 +86,12 @@ int inventario(){
             case 3:
                 system("pause");
                 system("cls");
-                return 0;
+                return cont;
                 break;
             default:
                 printf("Opcion incorrecta ingrese una opcion valida\n");
         }
     } while(opcion!=3);
-    free(listap);
-    getch();
-    return listap;
 }
 
 void registrarProducto(int cont, producto *nuevo){
@@ -122,7 +116,6 @@ void registrarProducto(int cont, producto *nuevo){
             printf("Datos invalidos\n");
     } else
         printf("Debe ingresar un valor positivo y diferente de cero\n");
-
 }
 
 void productosLista(int cont, producto *p){
@@ -135,4 +128,3 @@ void productosLista(int cont, producto *p){
         printf("\n");
     }
 }
-

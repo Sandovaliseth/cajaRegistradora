@@ -6,17 +6,19 @@
 
 int main(){
     int opcion, cont=0, tam=100;
-    venta *lista, *productos;
+    venta *lista;
     lista=malloc(tam*sizeof(venta));
+    producto *listap;
+    listap= (producto *)calloc(tam,sizeof(producto));
 
     do {
-        printf("********* Menu Principal *********\n");
-        printf("\t1. Registrar venta\n");
-        printf("\t2. Inventario\n");
-        printf("\t3. Listar ventas\n");
-        printf("\t4. Salir\n");
-        printf("**********************************\n");
-        printf("Por favor ingrese una opcion: ");
+        printf("\n\n\t\t\t********* Menu Principal *********\n\n");
+        printf("\t\t\t\t1. Registrar venta\n");
+        printf("\t\t\t\t2. Inventario\n");
+        printf("\t\t\t\t3. Listar ventas\n");
+        printf("\t\t\t\t4. Salir\n\n");
+        printf("\t\t\t**********************************\n");
+        printf("\nPor favor ingrese una opcion: ");
         scanf("%i", &opcion);
         switch(opcion){
             case 1:
@@ -26,7 +28,7 @@ int main(){
                 break;
             case 2:
                 system("cls");
-                productos=inventario();
+                inventario(&listap);
                 break;
             case 3:
                 system("cls");
@@ -44,6 +46,7 @@ int main(){
     } while(opcion!=4);
 
     free(lista);
+    free(listap);
     getch();
     return 0;
 }

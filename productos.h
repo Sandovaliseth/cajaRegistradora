@@ -20,7 +20,7 @@ typedef struct {
 
 void registrar(int cont, venta *v);
 void imprimirVentas(int cont,venta *v);
-inventario();
+int inventario(producto *p);
 void registrarProducto(int cont, producto *p);
 void productosLista(int cont, producto *p);
 void grabar(int cont, venta *v);
