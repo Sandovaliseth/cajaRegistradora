@@ -5,11 +5,26 @@
 #include "productos.h"
 
 int main(){
-    int opcion, cont=0, tam=100;
+    int opcion, cont=0, tam=100, cont_inventario=3;
     venta *lista;
     lista=malloc(tam*sizeof(venta));
     producto *listap;
     listap= (producto *)calloc(tam,sizeof(producto));
+
+    listap[0].id = 1;
+    strcpy(listap[0].nombre, "Carne");
+    listap[0].precio = 9000;
+    listap[0].cantidad = 50;
+
+    listap[1].id = 2;
+    strcpy(listap[1].nombre, "Leche");
+    listap[1].precio = 5000;
+    listap[1].cantidad = 15;
+
+    listap[2].id = 3;
+    strcpy(listap[2].nombre, "Arroz");
+    listap[2].precio = 6000;
+    listap[2].cantidad = 100;
 
     do {
         printf("\n\n\t\t\t********* Menu Principal *********\n\n");
@@ -23,12 +38,13 @@ int main(){
         switch(opcion){
             case 1:
                 system("cls");
-                registrar(cont, lista);
+                registrar(cont_inventario,cont, lista,listap);
                 cont++;
                 break;
             case 2:
                 system("cls");
-                inventario(&listap);
+                inventario(listap, cont_inventario);
+                cont_inventario++;
                 break;
             case 3:
                 system("cls");

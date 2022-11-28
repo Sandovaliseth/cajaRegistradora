@@ -45,3 +45,33 @@
 	<windows.h>
 	"productos.h"
 
+1669459192 source:b:\downloads\nuevacajaregistradora\cajaregistradora-main\main.c
+	<conio.h>
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	"productos.h"
+
+1669460908 b:\downloads\nuevacajaregistradora\cajaregistradora-main\productos.h
+
+1669461875 source:b:\downloads\nuevacajaregistradora\cajaregistradora-main\productos.c
+	<conio.h>
+	<stdio.h>
+	<stdlib.h>
+	"productos.h"
+
+1669598659 source:c:\users\amd\downloads\cajaregistradora\main.c
+	<conio.h>
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	"productos.h"
+
+1669598029 c:\users\amd\downloads\cajaregistradora\productos.h
+
+1669600060 source:c:\users\amd\downloads\cajaregistradora\productos.c
+	<conio.h>
+	<stdio.h>
+	<stdlib.h>
+	"productos.h"
+

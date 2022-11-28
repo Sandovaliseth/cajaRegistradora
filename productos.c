@@ -3,34 +3,99 @@
 #include<stdlib.h>
 #include "productos.h"
 
-void registrar(int cont, venta *v){
-    printf("Ingrese el codigo de la venta: ");
-    scanf("%i", &v[cont].id);
-    if(v[cont].id>0){
+void registrar(int cont_inventario,int cont, venta *v, producto *listap){
+    int id, mes, anio, dia, busqueda, cantidad_producto;
+    id:printf("Ingrese el codigo de la venta: ");
+    scanf("%i", &id);
+    if(id>0 && !existe(cont, v, id)){
+        v[cont].id = id;
         printf("Ingrese la fecha: ");
-        printf("\nDia:");
-        scanf("%i", &v[cont].fechaRegistro.dd);
-        if(v[cont].fechaRegistro.dd>0 && v[cont].fechaRegistro.dd<31){
-            printf("Mes:");
-            scanf("%i", &v[cont].fechaRegistro.mm);
-            if(v[cont].fechaRegistro.mm>0 && v[cont].fechaRegistro.mm<12){
-                printf("Anio:");
-                scanf("%i", &v[cont].fechaRegistro.aa);
+        dia:printf("\nDia:");
+        scanf("%i", &dia);
+        if(dia>0 && dia<=31){
+            v[cont].fechaRegistro.dd=dia;
+            mes:printf("Mes:");
+            scanf("%i", &mes);
+            if(mes>0 && mes<=12){
+                v[cont].fechaRegistro.mm=mes;
+                anio:printf("Anio:");
+                scanf("%i", &anio);
                 fflush(stdin);
-                if(v[cont].fechaRegistro.aa>0){
+                if(anio>0){
+                    v[cont].fechaRegistro.aa=anio;
                     printf("Ingrese el nombre del comprador: ");
                     gets(v[cont].nombreC);
-                    printf("-------- Registro exitoso --------\n");
-                    cont++;
-                }else
-                    printf("Datos invalidos\n");
-            }else
-                printf("Datos invalidos\n");
-        } else
-            printf("Datos invalidos\n");
-    }else{
-        printf("Debe ingresar un valor positivo o diferente de cero y es un valor existente\n");
+                    productosLista(cont_inventario,listap);
+                    otro:printf("----Seleccione el id de su producto----\n");
+                    scanf("%i", &busqueda);
+                    int index_producto=buscar_producto(busqueda,index_producto,cont_inventario,listap);
+                    if(index_producto!=-1){
+                         printf("----El producto seleccionado es: ----\n");
+                        printf("Nombre: %s\n", listap[index_producto].nombre);
+                        printf("Precio: %0.2f\n", listap[index_producto].precio);
+                        printf("\n");
+                        cant:printf("----Cuanto desea de este producto: ----\n");
+                        scanf("%i", &cantidad_producto);
+                        if(cantidad_producto<listap[index_producto].cantidad){
+                            printf("Registro exitoso\n");
+                            listap=venta_producto(cantidad_producto,listap,v,index_producto, cont);
+                            system("pause");
+                            system("cls");
+                        } else{
+                            printf("No existe esa cantidad dentro del inventario, ingrese nuevamente\n");
+                            goto cant;
+                        }
+                    }else {
+                        printf("El codigo del producto no existe\n");
+                        goto otro;
+                    }
+                } else{
+                    printf("Ingrese nuevamente un valor para anio");
+                    goto anio;
+                }
+            } else{
+                printf("Ingrese nuevamente un valor para mes");
+                goto mes;
+            }
+        } else{
+            printf("Ingrese nuevamente un valor para dia");
+            goto dia;
+        }
+    } else{
+        printf("Dato invalido, ingrese nuevamente un valor\n");
+        goto id;
     }
+}
+
+int existe(int cont, venta *v, int id) {
+    int repetido=0;
+      if(cont!=0){
+      for(int j=0;j<cont;j++){
+        if(v[j].id==id){
+            repetido=1;
+        }
+      }
+      return repetido;
+    }
+}
+
+int venta_producto(int cantidad, producto *listap, venta *venta,int index, int cont_usos){
+    listap[index].cantidad=listap[index].cantidad-cantidad;
+    int total = cantidad*listap[index].precio;
+    strcpy(venta[cont_usos].nombreP,listap[index].nombre);
+    venta[cont_usos].cantidadP = cantidad;
+    venta[cont_usos].total = total;
+    return listap;
+}
+
+int buscar_producto(int busca,int index, int cont, producto *listap){
+    int x=0;
+    for(x=0;x<cont;x++){
+        if(listap[x].id==busca){
+            return index=x;
+        }
+    }
+    return -1;
 }
 
 void imprimirVentas(int cont, venta *v){
@@ -39,6 +104,9 @@ void imprimirVentas(int cont, venta *v){
         printf("Codigo: %i\n", v[i].id);
         printf("Fecha: %i/%i/%i\n", v[i].fechaRegistro.dd, v[i].fechaRegistro.mm, v[i].fechaRegistro.aa);
         printf("Comprador: %s\n", v[i].nombreC);
+        printf("Producto: %s\n", v[i].nombreP);
+        printf("La cantidad que compro fue: %i\n", v[i].cantidadP);
+        printf("El precio total es de %i\n", v[i].total);
         printf("\n");
     }
 }
@@ -48,23 +116,8 @@ void salir(){
     exit(0);
 }
 
-int inventario(producto *listap){
-    static int cont=3;
+int inventario(producto *listap, int cont){
     int opcion, tam=100;
-    listap[0].id = 1;
-    strcpy(listap[0].nombre, "Carne");
-    listap[0].precio = 9000;
-    listap[0].cantidad = 50;
-
-    listap[1].id = 2;
-    strcpy(listap[1].nombre, "Leche");
-    listap[1].precio = 5000;
-    listap[1].cantidad = 15;
-
-    listap[2].id = 3;
-    strcpy(listap[2].nombre, "Arroz");
-    listap[2].precio = 6000;
-    listap[2].cantidad = 100;
 
     do {
         printf("------INVENTARIO------\n");
@@ -95,27 +148,38 @@ int inventario(producto *listap){
 }
 
 void registrarProducto(int cont, producto *nuevo){
+    int id, cantidad;
+    float precio;
     printf("Ingrese los datos del producto\n");
-    printf("Codigo: ");
-    scanf("%i", &nuevo[cont].id);
+    cod:printf("Codigo: ");
+    scanf("%i", &id);
     fflush(stdin);
-    if(nuevo[cont].id>0){
+    if(id>0 && !existeProducto(cont, nuevo, id)){
+        nuevo[cont].id=id;
         printf("Nombre: ");
         gets(nuevo[cont].nombre);
-        printf("Precio:");
-        scanf("%f", &nuevo[cont].precio);
-        if(nuevo[cont].precio>0){
-            printf("Cantidad: ");
-            scanf("%i", &nuevo[cont].cantidad);
-            if(nuevo[cont].cantidad>0){
+        pre:printf("Precio:");
+        scanf("%f", &precio);
+        if(precio>0){
+            nuevo[cont].precio=precio;
+            cant:printf("Cantidad: ");
+            scanf("%i", &cantidad);
+            if(cantidad>0){
+                nuevo[cont].cantidad=cantidad;
                 printf("-----Registro exitoso-----\n");
                 cont++;
-            } else
+            } else {
                 printf("Datos invalidos\n");
-        }else
+                goto cant;
+            }
+        }else {
             printf("Datos invalidos\n");
-    } else
-        printf("Debe ingresar un valor positivo y diferente de cero\n");
+            goto pre;
+        }
+    } else {
+        printf("Debe ingresar un valor positivo y diferente de cero o el valor ya existe\n");
+        goto cod;
+    }
 }
 
 void productosLista(int cont, producto *p){
@@ -126,5 +190,17 @@ void productosLista(int cont, producto *p){
         printf("Precio: %0.2f\n", p[i].precio);
         printf("Cantidad: %i\n", p[i].cantidad);
         printf("\n");
+    }
+}
+
+int existeProducto(int cont, producto *p, int id) {
+    int repetido=0;
+      if(cont!=0){
+      for(int j=0;j<cont;j++){
+        if(p[j].id==id){
+            repetido=1;
+        }
+      }
+      return repetido;
     }
 }
