@@ -135,6 +135,8 @@ int inventario(producto *listap, int cont){
             case 2:
                 system("cls");
                 productosLista(cont, listap);
+                system("pause");
+                system("cls");
                 break;
             case 3:
                 system("pause");

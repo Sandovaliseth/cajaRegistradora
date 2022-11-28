@@ -48,10 +48,13 @@ int main(){
                 break;
             case 3:
                 system("cls");
-                if(cont!=0)
+                if(cont!=0) {
                     imprimirVentas(cont, lista);
-                else
+                    system("pause");
+                    system("cls");
+                }else{
                     printf("No se encuentra ningun elemento para mostrar \n");
+                }
                 break;
             case 4:
                 salir();

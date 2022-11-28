@@ -75,3 +75,18 @@
 	<stdlib.h>
 	"productos.h"
 
+1669601812 source:c:\users\amd\desktop\cajaregistradora\main.c
+	<conio.h>
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	"productos.h"
+
+1669598029 c:\users\amd\desktop\cajaregistradora\productos.h
+
+1669601961 source:c:\users\amd\desktop\cajaregistradora\productos.c
+	<conio.h>
+	<stdio.h>
+	<stdlib.h>
+	"productos.h"
+
